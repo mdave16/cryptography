@@ -1,6 +1,6 @@
 {
   "name": "cryptography",
-	"homepage": "http://mdave16.github.io/cryptography",
+  "homepage": "http://mdave16.github.io/cryptography",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,9 +13,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-		"rmcache": "rm -rf node_modules/gh-pages/.cache",
-		"predeploy": "npm run rmcache & npm run build",
-  	"deploy": "gh-pages -d build"
+    "rmcache": "rm -rf node_modules/gh-pages/.cache",
+    "predeploy": "npm run rmcache & npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,6 +27,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "react-router-dom": "^5.0.0"
   }
 }
