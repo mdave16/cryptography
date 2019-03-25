@@ -6,6 +6,7 @@
   "dependencies": {
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
@@ -14,8 +15,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "rmcache": "rm -rf node_modules/gh-pages/.cache",
-    "predeploy": "npm run rmcache & npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "yarn rmcache & yarn build",
+    "deploy": "gh-pages -d build",
+		"serve": "yarn build & serve -s build -l 3000" 
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,7 +29,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1",
-    "react-router-dom": "^5.0.0"
+    "gh-pages": "^2.0.1"
   }
 }
