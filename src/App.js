@@ -16,7 +16,7 @@ function Users() {
 class App extends Component {
   render() {
     return (
-			<Router>
+			<Router basename="/cryptography">
 	      <div>
 	        <nav>
 	          <ul>
