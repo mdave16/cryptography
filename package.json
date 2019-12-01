@@ -17,7 +17,7 @@
     "rmcache": "rm -rf node_modules/gh-pages/.cache",
     "predeploy": "yarn rmcache & yarn build",
     "deploy": "gh-pages -d build",
-		"serve": "yarn build & serve -s build -l 3000" 
+    "serve": "yarn build & serve -s build -l 3000"
   },
   "eslintConfig": {
     "extends": "react-app"
