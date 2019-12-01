@@ -6,8 +6,9 @@ import App from './App';
 import Home from './Home'
 import About from './About'
 import Users from './Users'
+import PageNotFound from './PageNotFound'
 
-test('random shows nothing', () => {
+test('random shows page not found error', () => {
   const wrapper = mount(
     <MemoryRouter initialEntries={[ '/random' ]}>
       <App/>
@@ -17,6 +18,7 @@ test('random shows nothing', () => {
 	expect(wrapper.find(Home)).toHaveLength(0);
 	expect(wrapper.find(About)).toHaveLength(0);
 	expect(wrapper.find(Users)).toHaveLength(0);
+	expect(wrapper.find(PageNotFound)).toHaveLength(1)
 })
 
 test('/ goes to Home', () => {
@@ -29,6 +31,7 @@ test('/ goes to Home', () => {
 	expect(wrapper.find(Home)).toHaveLength(1);
 	expect(wrapper.find(About)).toHaveLength(0);
 	expect(wrapper.find(Users)).toHaveLength(0);
+	expect(wrapper.find(PageNotFound)).toHaveLength(0)
 })
 
 test('/about goes to About', () => {
@@ -41,6 +44,7 @@ test('/about goes to About', () => {
 	expect(wrapper.find(Home)).toHaveLength(0);
 	expect(wrapper.find(About)).toHaveLength(1);
 	expect(wrapper.find(Users)).toHaveLength(0);
+	expect(wrapper.find(PageNotFound)).toHaveLength(0);
 })
 
 test('/users goes to Users', () => {
@@ -53,4 +57,5 @@ test('/users goes to Users', () => {
 	expect(wrapper.find(Home)).toHaveLength(0);
 	expect(wrapper.find(About)).toHaveLength(0);
 	expect(wrapper.find(Users)).toHaveLength(1);
+	expect(wrapper.find(PageNotFound)).toHaveLength(0);
 })
