@@ -7,7 +7,7 @@
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
 		"react-router-dom": "^5.0.0",
-		"react-scripts": "2.1.8"
+		"react-scripts": "3.3.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -18,7 +18,8 @@
 		"predeploy": "yarn rmcache & yarn build",
 		"deploy": "gh-pages -d build",
 		"serve": "yarn build & serve -s build -l 3000",
-		"format": "yarn prettier --no-config --write --use-tabs --no-semi  \"**/*.js\""
+		"format": "yarn prettier --no-config --write --use-tabs --no-semi  \"**/*.js\"",
+		"upgrade-deps": "yarn upgrade --force -L --emoji"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
