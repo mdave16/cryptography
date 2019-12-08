@@ -7,6 +7,7 @@
 ## Screenshots (if possible)
 
 ## Your Environment
-* OS:
-* Browser:
-* Time:
+
+- OS:
+- Browser:
+- Time:

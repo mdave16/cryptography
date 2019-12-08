@@ -1,7 +1,9 @@
 # Crypography
+
 This is a small web page as part of [my website hosted on github](https://mdave16.github.io). The aim is for me to practice both my react skills and also have some fun learning about different encryption and decryption techniques.
 
 ## Local Development
+
 To get started, you just neeed to run
 
     yarn install
