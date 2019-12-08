@@ -1,38 +1,38 @@
 {
-  "name": "cryptography",
-  "homepage": "http://mdave16.github.io/cryptography",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "rmcache": "rm -rf node_modules/gh-pages/.cache",
-    "predeploy": "yarn rmcache & yarn build",
-    "deploy": "gh-pages -d build",
-    "serve": "yarn build & serve -s build -l 3000",
+	"name": "cryptography",
+	"homepage": "http://mdave16.github.io/cryptography",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^16.8.4",
+		"react-dom": "^16.8.4",
+		"react-router-dom": "^5.0.0",
+		"react-scripts": "2.1.8"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"rmcache": "rm -rf node_modules/gh-pages/.cache",
+		"predeploy": "yarn rmcache & yarn build",
+		"deploy": "gh-pages -d build",
+		"serve": "yarn build & serve -s build -l 3000",
 		"format": "yarn prettier --no-config --write --use-tabs --no-semi  \"**/*.js\""
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "gh-pages": "^2.0.1",
-    "prettier": "1.19.1"
-  }
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"enzyme": "^3.10.0",
+		"enzyme-adapter-react-16": "^1.15.1",
+		"gh-pages": "^2.0.1",
+		"prettier": "1.19.1"
+	}
 }
