@@ -17,7 +17,8 @@
     "rmcache": "rm -rf node_modules/gh-pages/.cache",
     "predeploy": "yarn rmcache & yarn build",
     "deploy": "gh-pages -d build",
-    "serve": "yarn build & serve -s build -l 3000"
+    "serve": "yarn build & serve -s build -l 3000",
+		"format": "yarn prettier --no-config --write --use-tabs --no-semi  \"**/*.js\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,6 +32,7 @@
   "devDependencies": {
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "prettier": "1.19.1"
   }
 }
