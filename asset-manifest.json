@@ -1,13 +1,22 @@
 {
-  "main.css": "/cryptography/static/css/main.e8501574.chunk.css",
-  "main.js": "/cryptography/static/js/main.c366c7a7.chunk.js",
-  "main.js.map": "/cryptography/static/js/main.c366c7a7.chunk.js.map",
-  "runtime~main.js": "/cryptography/static/js/runtime~main.7a52769d.js",
-  "runtime~main.js.map": "/cryptography/static/js/runtime~main.7a52769d.js.map",
-  "static/js/2.c38339ea.chunk.js": "/cryptography/static/js/2.c38339ea.chunk.js",
-  "static/js/2.c38339ea.chunk.js.map": "/cryptography/static/js/2.c38339ea.chunk.js.map",
-  "index.html": "/cryptography/index.html",
-  "precache-manifest.0b2006eac413ed5f163a2abc2a77ddc4.js": "/cryptography/precache-manifest.0b2006eac413ed5f163a2abc2a77ddc4.js",
-  "service-worker.js": "/cryptography/service-worker.js",
-  "static/css/main.e8501574.chunk.css.map": "/cryptography/static/css/main.e8501574.chunk.css.map"
+  "files": {
+    "main.css": "/cryptography/static/css/main.e8c994de.chunk.css",
+    "main.js": "/cryptography/static/js/main.f648fb2e.chunk.js",
+    "main.js.map": "/cryptography/static/js/main.f648fb2e.chunk.js.map",
+    "runtime-main.js": "/cryptography/static/js/runtime-main.f52e0b95.js",
+    "runtime-main.js.map": "/cryptography/static/js/runtime-main.f52e0b95.js.map",
+    "static/js/2.bd19a1c5.chunk.js": "/cryptography/static/js/2.bd19a1c5.chunk.js",
+    "static/js/2.bd19a1c5.chunk.js.map": "/cryptography/static/js/2.bd19a1c5.chunk.js.map",
+    "index.html": "/cryptography/index.html",
+    "precache-manifest.afb1a0416ff080118409858fbf427b78.js": "/cryptography/precache-manifest.afb1a0416ff080118409858fbf427b78.js",
+    "service-worker.js": "/cryptography/service-worker.js",
+    "static/css/main.e8c994de.chunk.css.map": "/cryptography/static/css/main.e8c994de.chunk.css.map",
+    "static/js/2.bd19a1c5.chunk.js.LICENSE": "/cryptography/static/js/2.bd19a1c5.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f52e0b95.js",
+    "static/js/2.bd19a1c5.chunk.js",
+    "static/css/main.e8c994de.chunk.css",
+    "static/js/main.f648fb2e.chunk.js"
+  ]
 }
