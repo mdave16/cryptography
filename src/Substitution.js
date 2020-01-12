@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "./Substitution.css"
 
 const removeDuplicates = arr => {
 	var seen = {}
@@ -24,7 +25,7 @@ class Substitution extends Component {
 			plain: "",
 			cipher: "",
 			secret: "",
-			encrypt: "encrypt"
+			mode: "encrypt"
 		}
 	}
 
@@ -70,13 +71,13 @@ class Substitution extends Component {
 	}
 
 	plainTextChange = event => {
-		if (this.state.encrypt === "encrypt") {
+		if (this.state.mode === "encrypt") {
 			this.setState({
 				plain: event.target.value,
 				cipher: this.encrypt(this.state.secret, event.target.value)
 			})
 		}
-		if (this.state.encrypt === "crack") {
+		if (this.state.mode === "crack") {
 			this.setState({
 				plain: event.target.value,
 				secret: this.crack(event.target.value, this.state.cipher)
@@ -84,13 +85,13 @@ class Substitution extends Component {
 		}
 	}
 	cipherTextChange = event => {
-		if (this.state.encrypt === "decrypt") {
+		if (this.state.mode === "decrypt") {
 			this.setState({
 				plain: this.decrypt(this.state.secret, event.target.value),
 				cipher: event.target.value
 			})
 		}
-		if (this.state.encrypt === "crack") {
+		if (this.state.mode === "crack") {
 			this.setState({
 				secret: this.crack(this.state.plain, event.target.value),
 				cipher: event.target.value
@@ -98,13 +99,13 @@ class Substitution extends Component {
 		}
 	}
 	secretTextChange = event => {
-		if (this.state.encrypt === "encrypt") {
+		if (this.state.mode === "encrypt") {
 			this.setState({
 				secret: event.target.value,
 				cipher: this.encrypt(event.target.value, this.state.plain)
 			})
 		}
-		if (this.state.encrypt === "decrypt") {
+		if (this.state.mode === "decrypt") {
 			this.setState({
 				secret: event.target.value,
 				plain: this.decrypt(event.target.value, this.state.cipher)
@@ -113,64 +114,61 @@ class Substitution extends Component {
 	}
 	handleOptionChange = event => {
 		this.setState({
-			encrypt: event.target.value
+			mode: event.target.value
 		})
 	}
 
 	render() {
 		return (
 			<form>
-				<label>
-					<input
-						type="radio"
-						name="encrypt"
-						value="encrypt"
-						checked={this.state.encrypt === "encrypt"}
+				<div className="row">
+					<label htmlFor="mode">What would you like to do?</label>
+					<select
 						onChange={this.handleOptionChange}
-					/>
-					Encrypt
-				</label>
-				<label>
+						value={this.state.mode}
+						id="mode"
+					>
+						<option value="encrypt">Encrypt</option>
+						<option value="decrypt">decrypt</option>
+						<option value="crack">crack</option>
+					</select>
+				</div>
+
+				<div className="row">
+					<label htmlFor="secret">Secret key: </label>
 					<input
-						type="radio"
-						name="encrypt"
-						value="decrypt"
-						checked={this.state.encrypt === "decrypt"}
-						onChange={this.handleOptionChange}
+						className="u-full-width"
+						id="secret"
+						type="text"
+						readOnly={this.state.mode === "crack"}
+						onChange={this.secretTextChange}
+						value={this.state.secret}
 					/>
-					Decrypt
-				</label>
-				<label>
-					<input
-						type="radio"
-						name="encrypt"
-						value="crack"
-						checked={this.state.encrypt === "crack"}
-						onChange={this.handleOptionChange}
+				</div>
+				<div className="row">
+					{" "}
+					<label htmlFor="plain">Decrypted message: </label>
+					<textarea
+						className="u-full-width"
+						type="textarea"
+						id="plain"
+						readOnly={this.state.mode === "decrypt"}
+						onChange={this.plainTextChange}
+						value={this.state.plain}
 					/>
-					Crack
-				</label>
-				<p>Secret key: </p>
-				<input
-					type="text"
-					disabled={this.state.encrypt === "crack"}
-					onChange={this.secretTextChange}
-					value={this.state.secret}
-				/>
-				<p>Decrypted message: </p>
-				<input
-					type="text"
-					disabled={this.state.encrypt === "decrypt"}
-					onChange={this.plainTextChange}
-					value={this.state.plain}
-				/>
-				<p>Encrypted message: </p>
-				<input
-					type="text"
-					disabled={this.state.encrypt === "encrypt"}
-					onChange={this.cipherTextChange}
-					value={this.state.cipher}
-				/>
+				</div>
+				<div className="row">
+					{" "}
+					<label htmlFor="cipher">Encrypted message: </label>
+					<textarea
+						className="u-full-width"
+						type="textarea"
+						id="cipher"
+						readOnly={this.state.mode === "encrypt"}
+						onChange={this.cipherTextChange}
+						value={this.state.cipher}
+					/>
+				</div>
 			</form>
 		)
 	}

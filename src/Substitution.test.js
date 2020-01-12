@@ -2,98 +2,53 @@ import React from "react"
 import { mount } from "enzyme"
 import Substitution from "./Substitution"
 
+const change = (inputElt, text) => {
+	inputElt.simulate("change", { target: { value: text } })
+}
+
+
 describe("substitution cipher", () => {
 	describe("has encrypt and decrypt and crack mode", () => {
 		const wrapper = mount(<Substitution />)
+		const secretKey = () => wrapper.find("input").at(0)
+		const plainMessage = () => wrapper.find("textarea").at(0)
+		const encodedMessage = () => wrapper.find("textarea").at(1)
+		const mode = () => wrapper.find("select").at(0)
+
 		it("is initially in encrypt mode", () => {
-			expect(wrapper.state("encrypt")).toEqual("encrypt")
-
-			expect(
-				wrapper
-					.find("input")
-					.at(3)
-					.prop("disabled")
-			).toEqual(false)
-			expect(
-				wrapper
-					.find("input")
-					.at(4)
-					.prop("disabled")
-			).toEqual(false)
-			expect(
-				wrapper
-					.find("input")
-					.at(5)
-					.prop("disabled")
-			).toEqual(true)
+			expect(wrapper.state("mode")).toEqual("encrypt")
+			expect(secretKey().prop("readOnly")).toEqual(false)
+			expect(plainMessage().prop("readOnly")).toEqual(false)
+			expect(encodedMessage().prop("readOnly")).toEqual(true)
 		})
+
 		it("can be set to decrypt mode", () => {
-			wrapper
-				.find("input")
-				.at(1)
-				.simulate("change", { target: { value: "decrypt" } })
-			expect(wrapper.state("encrypt")).toEqual("decrypt")
+			change(mode(), "decrypt")
 
-			expect(
-				wrapper
-					.find("input")
-					.at(3)
-					.prop("disabled")
-			).toEqual(false)
-			expect(
-				wrapper
-					.find("input")
-					.at(4)
-					.prop("disabled")
-			).toEqual(true)
-			expect(
-				wrapper
-					.find("input")
-					.at(5)
-					.prop("disabled")
-			).toEqual(false)
+			expect(wrapper.state("mode")).toEqual("decrypt")
+			expect(secretKey().prop("readOnly")).toEqual(false)
+			expect(plainMessage().prop("readOnly")).toEqual(true)
+			expect(encodedMessage().prop("readOnly")).toEqual(false)
 		})
-		it("can be set to crack mode", () => {
-			wrapper
-				.find("input")
-				.at(2)
-				.simulate("change", { target: { value: "crack" } })
-			expect(wrapper.state("encrypt")).toEqual("crack")
 
-			expect(
-				wrapper
-					.find("input")
-					.at(3)
-					.prop("disabled")
-			).toEqual(true)
-			expect(
-				wrapper
-					.find("input")
-					.at(4)
-					.prop("disabled")
-			).toEqual(false)
-			expect(
-				wrapper
-					.find("input")
-					.at(5)
-					.prop("disabled")
-			).toEqual(false)
+		it("can be set to crack mode", () => {
+			change(mode(), "crack")
+
+			expect(wrapper.state("mode")).toEqual("crack")
+			expect(secretKey().prop("readOnly")).toEqual(true)
+			expect(plainMessage().prop("readOnly")).toEqual(false)
+			expect(encodedMessage().prop("readOnly")).toEqual(false)
 		})
 	})
 
 	describe("encryption", () => {
+		let wrapper = mount(<Substitution />)
+		const secretKey = () => wrapper.find("input").at(0)
+		const plainMessage = () => wrapper.find("textarea").at(0)
+
 		it("encrypts usng a substitution cipher", () => {
-			const wrapper = mount(<Substitution />)
-			wrapper
-				.find("input")
-				.at(3)
-				.simulate("change", { target: { value: "zebras" } })
-			wrapper
-				.find("input")
-				.at(4)
-				.simulate("change", {
-					target: { value: "Handles punctuation and case!" }
-				})
+			change(secretKey(), "zebras")
+			change(plainMessage(), "Handles punctuation and case!")
 
 			expect(wrapper.state("secret")).toEqual("zebras")
 			expect(wrapper.state("plain")).toEqual("Handles punctuation and case!")
@@ -101,17 +56,9 @@ describe("substitution cipher", () => {
 		})
 
 		it("encrypts if given in other order", () => {
-			const wrapper = mount(<Substitution />)
-			wrapper
-				.find("input")
-				.at(4)
-				.simulate("change", {
-					target: { value: "Handles punctuation and case!" }
-				})
-			wrapper
-				.find("input")
-				.at(3)
-				.simulate("change", { target: { value: "zebras" } })
+			wrapper = mount(<Substitution />)
+			change(plainMessage(), "Handles punctuation and case!")
+			change(secretKey(), "zebras")
 
 			expect(wrapper.state("secret")).toEqual("zebras")
 			expect(wrapper.state("plain")).toEqual("Handles punctuation and case!")
@@ -120,22 +67,15 @@ describe("substitution cipher", () => {
 	})
 
 	describe("decryption", () => {
+		let wrapper = mount(<Substitution />)
+		const mode = () => wrapper.find("select").at(0)
+		const secretKey = () => wrapper.find("input").at(0)
+		const encodedMessage = () => wrapper.find("textarea").at(1)
+
 		it("decrypts usng a substitution cipher", () => {
-			const wrapper = mount(<Substitution />)
-			wrapper
-				.find("input")
-				.at(1)
-				.simulate("change", { target: { value: "decrypt" } })
-			wrapper
-				.find("input")
-				.at(3)
-				.simulate("change", { target: { value: "zebras" } })
-			wrapper
-				.find("input")
-				.at(5)
-				.simulate("change", {
-					target: { value: "Dzkriap mtkbqtzqflk zkr bzpa!" }
-				})
+			change(mode(), "decrypt")
+			change(secretKey(), "zebras")
+			change(encodedMessage(), "Dzkriap mtkbqtzqflk zkr bzpa!")
 
 			expect(wrapper.state("secret")).toEqual("zebras")
 			expect(wrapper.state("plain")).toEqual("Handles punctuation and case!")
@@ -143,21 +83,10 @@ describe("substitution cipher", () => {
 		})
 
 		it("decrypts if given in other order", () => {
-			const wrapper = mount(<Substitution />)
-			wrapper
-				.find("input")
-				.at(1)
-				.simulate("change", { target: { value: "decrypt" } })
-			wrapper
-				.find("input")
-				.at(5)
-				.simulate("change", {
-					target: { value: "Dzkriap mtkbqtzqflk zkr bzpa!" }
-				})
-			wrapper
-				.find("input")
-				.at(3)
-				.simulate("change", { target: { value: "zebras" } })
+			wrapper = mount(<Substitution />)
+			change(mode(), "decrypt")
+			change(encodedMessage(), "Dzkriap mtkbqtzqflk zkr bzpa!")
+			change(secretKey(), "zebras")
 
 			expect(wrapper.state("secret")).toEqual("zebras")
 			expect(wrapper.state("plain")).toEqual("Handles punctuation and case!")
@@ -166,24 +95,15 @@ describe("substitution cipher", () => {
 	})
 
 	describe("cracking", () => {
+		let wrapper = mount(<Substitution />)
+		const mode = () => wrapper.find("select").at(0)
+		const plainMessage = () => wrapper.find("textarea").at(0)
+		const encodedMessage = () => wrapper.find("textarea").at(1)
+
 		it("cracks the secret given the input and output", () => {
-			const wrapper = mount(<Substitution />)
-			wrapper
-				.find("input")
-				.at(1)
-				.simulate("change", { target: { value: "crack" } })
-			wrapper
-				.find("input")
-				.at(4)
-				.simulate("change", {
-					target: { value: "Handles punctuation and case!" }
-				})
-			wrapper
-				.find("input")
-				.at(5)
-				.simulate("change", {
-					target: { value: "Dzkriap mtkbqtzqflk zkr bzpa!" }
-				})
+			change(mode(), "crack")
+			change(plainMessage(), "Handles punctuation and case!")
+			change(encodedMessage(), "Dzkriap mtkbqtzqflk zkr bzpa!")
 
 			expect(wrapper.state("secret")).toEqual("z_bra__df__i_klm__pqt_____")
 			expect(wrapper.state("plain")).toEqual("Handles punctuation and case!")
@@ -191,23 +111,10 @@ describe("substitution cipher", () => {
 		})
 
 		it("cracks the secret given in other order", () => {
-			const wrapper = mount(<Substitution />)
-			wrapper
-				.find("input")
-				.at(1)
-				.simulate("change", { target: { value: "crack" } })
-			wrapper
-				.find("input")
-				.at(5)
-				.simulate("change", {
-					target: { value: "Dzkriap mtkbqtzqflk zkr bzpa!" }
-				})
-			wrapper
-				.find("input")
-				.at(4)
-				.simulate("change", {
-					target: { value: "Handles punctuation and case!" }
-				})
+			wrapper = mount(<Substitution />)
+			change(mode(), "crack")
+			change(encodedMessage(), "Dzkriap mtkbqtzqflk zkr bzpa!")
+			change(plainMessage(), "Handles punctuation and case!")
 
 			expect(wrapper.state("secret")).toEqual("z_bra__df__i_klm__pqt_____")
 			expect(wrapper.state("plain")).toEqual("Handles punctuation and case!")
