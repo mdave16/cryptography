@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import "./Substitution.css"
 
 const removeDuplicates = arr => {
@@ -120,7 +120,42 @@ class Substitution extends Component {
 
 	render() {
 		return (
-			<form>
+			<Fragment>
+				<h2>Substitution cipher</h2>
+				<blockquote cite="https://en.wikipedia.org/wiki/Substitution_cipher">
+					<p>
+						In{" "}
+						<a
+							href="https://en.wikipedia.org/wiki/Cryptography"
+							title="Cryptography"
+						>
+							cryptography
+						</a>
+						, a <b>substitution cipher</b> is a method of{" "}
+						<a
+							href="https://en.wikipedia.org/wiki/Encrypting"
+							title="Encrypting"
+						>
+							encrypting
+						</a>{" "}
+						by which units of{" "}
+						<a href="https://en.wikipedia.org/wiki/Plaintext" title="Plaintext">
+							plaintext
+						</a>{" "}
+						are replaced with{" "}
+						<a
+							href="https://en.wikipedia.org/wiki/Ciphertext"
+							title="Ciphertext"
+						>
+							ciphertext
+						</a>
+						, according to a fixed system; the "units" may be single letters
+						(the most common), pairs of letters, triplets of letters, mixtures
+						of the above, and so forth. The receiver deciphers the text by
+						performing the inverse substitution. -- wikipedia
+					</p>
+				</blockquote>
+
 				<div className="row">
 					<label htmlFor="mode">What would you like to do?</label>
 					<select
@@ -169,7 +204,7 @@ class Substitution extends Component {
 						value={this.state.cipher}
 					/>
 				</div>
-			</form>
+			</Fragment>
 		)
 	}
 }
