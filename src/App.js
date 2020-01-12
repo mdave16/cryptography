@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
+import React, { Component, Fragment } from "react"
+import { Route, Link, Switch } from "react-router-dom"
 import Home from "./Home"
 import Substitution from "./Substitution"
 import PageNotFound from "./PageNotFound"
@@ -7,15 +7,15 @@ import PageNotFound from "./PageNotFound"
 class App extends Component {
 	render() {
 		return (
-			<Router basename="/cryptography">
+			<Fragment>
 				<div>
 					<nav>
 						<ul>
 							<li>
-								<Link to="/">Home</Link>
+								<Link to="">Home</Link>
 							</li>
 							<li>
-								<Link to="/substitution/">Substitution ciphers</Link>
+								<Link to="/substitution">Substitution ciphers</Link>
 							</li>
 						</ul>
 					</nav>
@@ -25,7 +25,7 @@ class App extends Component {
 					<Route path="/substitution" component={Substitution} />
 					<Route component={PageNotFound} />
 				</Switch>
-			</Router>
+			</Fragment>
 		)
 	}
 }
