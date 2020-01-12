@@ -9,6 +9,9 @@ const NavigationBar = () => (
 		<Link to="/substitution" className="three columns">
 			Substitution ciphers
 		</Link>
+		<Link to="/railfence" className="three columns">
+			Rail Fence Cipher
+		</Link>
 	</nav>
 )
 
