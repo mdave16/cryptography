@@ -129,8 +129,8 @@ class Substitution extends Component {
 						id="mode"
 					>
 						<option value="encrypt">Encrypt</option>
-						<option value="decrypt">decrypt</option>
-						<option value="crack">crack</option>
+						<option value="decrypt">Decrypt</option>
+						<option value="crack">Crack</option>
 					</select>
 				</div>
 

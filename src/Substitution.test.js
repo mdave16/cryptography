@@ -6,7 +6,6 @@ const change = (inputElt, text) => {
 	inputElt.simulate("change", { target: { value: text } })
 }
 
-
 describe("substitution cipher", () => {
 	describe("has encrypt and decrypt and crack mode", () => {
 		const wrapper = mount(<Substitution />)
