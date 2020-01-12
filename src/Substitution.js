@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react"
-import "./Substitution.css"
+import "./main.css"
 
 const removeDuplicates = arr => {
 	var seen = {}
