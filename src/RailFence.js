@@ -6,7 +6,7 @@ const zigzagmod = (a, b) => Math.min(mod(a, 2 * b - 2), mod(-a, 2 * b - 2))
 const copiesOf = (length, item) => Array.from(Array(length), () => item)
 const compareBy = c => (a, b) => a[c] - b[c]
 const compareByThen = (c, d) => (a, b) =>
-	compareBy(c)(a, b) == 0 ? compareBy(d)(a, b) : compareBy(c)(a, b)
+	compareBy(c)(a, b) === 0 ? compareBy(d)(a, b) : compareBy(c)(a, b)
 const range = n => Array.from(Array(n).keys())
 
 class RailFence extends Component {
@@ -25,7 +25,6 @@ class RailFence extends Component {
 			return plain
 		}
 		return plain
-			.replace(/ /g, "")
 			.split("")
 			.reduce((a, x, i) => {
 				a[zigzagmod(i, secret)] += x
@@ -66,8 +65,9 @@ class RailFence extends Component {
 			})
 		}
 	}
-	secretTextChange = event => {
-		const secret = event.target.value > 0 ? event.target.value : 3
+	secretChange = event => {
+		const secret = Number.parseInt(event.target.value)
+		if (secret <= 0 || isNaN(secret)) {return} 
 		if (this.state.mode === "encrypt") {
 			this.setState({
 				secret: secret,
@@ -126,7 +126,7 @@ class RailFence extends Component {
 						id="secret"
 						type="number"
 						pattern="[0-9]+"
-						onChange={this.secretTextChange}
+						onChange={this.secretChange}
 						value={this.state.secret}
 					/>
 				</div>

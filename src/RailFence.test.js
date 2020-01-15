@@ -67,7 +67,7 @@ describe("Rail Fence cipher", () => {
 
 			expect(wrapper.state("secret")).toEqual(3)
 			expect(wrapper.state("plain")).toEqual("Handles punctuation!")
-			expect(wrapper.state("cipher")).toEqual("Hluuoadepntainnsct!")
+			expect(wrapper.state("cipher")).toEqual("Hlptiade ucuto!nsnan")
 		})
 
 		it("encrypts if given in other order", () => {
@@ -76,7 +76,7 @@ describe("Rail Fence cipher", () => {
 
 			expect(wrapper.state("secret")).toEqual(3)
 			expect(wrapper.state("plain")).toEqual("Handles punctuation!")
-			expect(wrapper.state("cipher")).toEqual("Hluuoadepntainnsct!")
+			expect(wrapper.state("cipher")).toEqual("Hlptiade ucuto!nsnan")
 		})
 	})
 
@@ -94,17 +94,17 @@ describe("Rail Fence cipher", () => {
 		it("calculates decryption if the key is bigger", () => {
 			change(mode(), "decrypt")
 
-			change(encodedMessage(), "Hluuoadepntainnsct!")
+			change(encodedMessage(), "Hlptiade ucuto!nsnan")
 
 			expect(wrapper.state("secret")).toEqual(3)
-			expect(wrapper.state("plain")).toEqual("Handlespunctuation!")
-			expect(wrapper.state("cipher")).toEqual("Hluuoadepntainnsct!")
+			expect(wrapper.state("plain")).toEqual("Handles punctuation!")
+			expect(wrapper.state("cipher")).toEqual("Hlptiade ucuto!nsnan")
 
 			change(secretKey(), 4)
 
 			expect(wrapper.state("secret")).toEqual(4)
-			expect(wrapper.state("plain")).toEqual("Handlespunctuation!")
-			expect(wrapper.state("cipher")).toEqual("Hotcaalditneupn!snu")
+			expect(wrapper.state("plain")).toEqual("Hiuntaldoa!ep nnsutc")
+			expect(wrapper.state("cipher")).toEqual("Hlptiade ucuto!nsnan")
 		})
 	})
 })
