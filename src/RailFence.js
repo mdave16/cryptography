@@ -67,7 +67,7 @@ class RailFence extends Component {
 	}
 	secretChange = event => {
 		const secret = Number.parseInt(event.target.value)
-		if (secret <= 0 || isNaN(secret)) {return} 
+		if (secret <= 0 || isNaN(secret)) {return}
 		if (this.state.mode === "encrypt") {
 			this.setState({
 				secret: secret,
@@ -120,7 +120,7 @@ class RailFence extends Component {
 				</div>
 
 				<div className="row">
-					<label htmlFor="secret">Secret key: </label>
+					<label htmlFor="secret">Number of rails: </label>
 					<input
 						className="u-full-width"
 						id="secret"
