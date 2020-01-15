@@ -23,14 +23,14 @@ describe("Rail Fence cipher", () => {
 			expect(plainMessage().prop("readOnly")).toEqual(false)
 			expect(encodedMessage().prop("readOnly")).toEqual(true)
 		})
-		// 
-		// it("can be set to decrypt mode", () => {
-		// 	change(mode(), "decrypt")
-		//
-		// 	expect(wrapper.state("mode")).toEqual("decrypt")
-		// 	expect(plainMessage().prop("readOnly")).toEqual(true)
-		// 	expect(encodedMessage().prop("readOnly")).toEqual(false)
-		// })
+
+		it("can be set to decrypt mode", () => {
+			change(mode(), "decrypt")
+
+			expect(wrapper.state("mode")).toEqual("decrypt")
+			expect(plainMessage().prop("readOnly")).toEqual(true)
+			expect(encodedMessage().prop("readOnly")).toEqual(false)
+		})
 	})
 
 	describe("cleaning input", () => {
@@ -91,22 +91,20 @@ describe("Rail Fence cipher", () => {
 			expect(wrapper.state("cipher")).toEqual("Handles punctuation!")
 		})
 
-		it("calculates encryption if the key is bigger", () => {
-			change(encodedMessage(), "Hluuoadepntainnsct!")
-			change(secretKey(), 3)
+		it("calculates decryption if the key is bigger", () => {
+			change(mode(), "decrypt")
 
-			expect(wrapper.state("secret")).toEqual(3)
-			expect(wrapper.state("plain")).toEqual("Handlespunctuation!")
-			expect(wrapper.state("cipher")).toEqual("Hluuoadepntainnsct!")
-		})
-
-		it("encrypts if given in other order", () => {
-			change(secretKey(), 3)
 			change(encodedMessage(), "Hluuoadepntainnsct!")
 
 			expect(wrapper.state("secret")).toEqual(3)
 			expect(wrapper.state("plain")).toEqual("Handlespunctuation!")
 			expect(wrapper.state("cipher")).toEqual("Hluuoadepntainnsct!")
+
+			change(secretKey(), 4)
+
+			expect(wrapper.state("secret")).toEqual(4)
+			expect(wrapper.state("plain")).toEqual("Handlespunctuation!")
+			expect(wrapper.state("cipher")).toEqual("Hotcaalditneupn!snu")
 		})
 	})
 })

@@ -3,6 +3,7 @@ import "./main.css"
 
 const mod = (a, b) => ((a % b) + b) % b
 const zigzagmod = (a, b) => Math.min(mod(a, 2 * b - 2), mod(-a, 2 * b - 2))
+const copies_of = (length, item) => Array.from({ length: length }, () => item)
 
 class RailFence extends Component {
 	constructor(props) {
@@ -22,13 +23,10 @@ class RailFence extends Component {
 		return plain
 			.replace(/ /g, "")
 			.split("")
-			.reduce(
-				(a, x, i) => {
-					a[zigzagmod(i, secret)] += x
-					return a
-				},
-				Array.from({ length: secret }, () => "")
-			)
+			.reduce((a, x, i) => {
+				a[zigzagmod(i, secret)] += x
+				return a
+			}, copies_of(secret, ""))
 			.reduce((a, b) => a + b, "")
 	}
 
@@ -36,6 +34,24 @@ class RailFence extends Component {
 		if (secret === 1) {
 			return cipher
 		}
+		const blocks = cipher
+			.split("")
+			.reduce((v, a, i) => {
+				v[zigzagmod(i, secret)]++
+				return v
+			}, copies_of(secret, 0))
+			.reduce((ac, c, i) => {
+				ac[i] = {
+					start: i == 0 ? 0 : ac[i - 1]["start"] + ac[i - 1]["len"],
+					len: c
+				}
+				return ac
+			}, [])
+			.map((a, i) => cipher.substr(a["start"], a["len"]).split(""))
+
+		return cipher
+			.split("")
+			.reduce((w, a, i) => (w += blocks[zigzagmod(i, secret)].shift()), "")
 	}
 
 	plainTextChange = event => {
@@ -103,7 +119,7 @@ class RailFence extends Component {
 						id="mode"
 					>
 						<option value="encrypt">Encrypt</option>
-						// <option value="decrypt">Decrypt</option>
+						<option value="decrypt">Decrypt</option>
 					</select>
 				</div>
 
