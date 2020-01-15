@@ -3,7 +3,11 @@ import "./main.css"
 
 const mod = (a, b) => ((a % b) + b) % b
 const zigzagmod = (a, b) => Math.min(mod(a, 2 * b - 2), mod(-a, 2 * b - 2))
-const copies_of = (length, item) => Array.from({ length: length }, () => item)
+const copiesOf = (length, item) => Array.from(Array(length), () => item)
+const compareBy = c => (a, b) => a[c] - b[c]
+const compareByThen = (c, d) => (a, b) =>
+	compareBy(c)(a, b) == 0 ? compareBy(d)(a, b) : compareBy(c)(a, b)
+const range = n => Array.from(Array(n).keys())
 
 class RailFence extends Component {
 	constructor(props) {
@@ -26,7 +30,7 @@ class RailFence extends Component {
 			.reduce((a, x, i) => {
 				a[zigzagmod(i, secret)] += x
 				return a
-			}, copies_of(secret, ""))
+			}, copiesOf(secret, ""))
 			.reduce((a, b) => a + b, "")
 	}
 
@@ -34,24 +38,16 @@ class RailFence extends Component {
 		if (secret === 1) {
 			return cipher
 		}
-		const blocks = cipher
-			.split("")
-			.reduce((v, a, i) => {
-				v[zigzagmod(i, secret)]++
-				return v
-			}, copies_of(secret, 0))
-			.reduce((ac, c, i) => {
-				ac[i] = {
-					start: i == 0 ? 0 : ac[i - 1]["start"] + ac[i - 1]["len"],
-					len: c
-				}
-				return ac
-			}, [])
-			.map((a, i) => cipher.substr(a["start"], a["len"]).split(""))
-
-		return cipher
-			.split("")
-			.reduce((w, a, i) => (w += blocks[zigzagmod(i, secret)].shift()), "")
+		return range(cipher.length)
+			.map(i => ({ i: i, z: zigzagmod(i, secret) }))
+			.sort(compareByThen("z", "i"))
+			.map((a, i) => {
+				a["c"] = cipher[i]
+				return a
+			})
+			.sort(compareBy("i"))
+			.map(a => a["c"])
+			.join("")
 	}
 
 	plainTextChange = event => {
