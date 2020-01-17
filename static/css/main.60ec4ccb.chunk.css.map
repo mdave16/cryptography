@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.css"],"names":[],"mappings":"AAAA,mCACC,wBACD,CAEA,wDACC,qBACD","file":"main.60ec4ccb.chunk.css","sourcesContent":["input[readOnly], textarea[readOnly] {\n\tbackground-color:  #e1e1d0\n}\n\ninput[aria-invalid=\"true\"], input[aria-invalid=\"true\"]:focus {\n\tborder: red thin solid;\n}\n"]}

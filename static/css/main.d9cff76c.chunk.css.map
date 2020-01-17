@@ -1,1 +1,0 @@
-{"version":3,"sources":["main.css"],"names":[],"mappings":"AAAA,mCACC,wBACD","file":"main.d9cff76c.chunk.css","sourcesContent":["input[readOnly], textarea[readOnly] {\n\tbackground-color:  #e1e1d0\n}\n"]}
