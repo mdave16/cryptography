@@ -37,16 +37,22 @@ describe("Rail Fence cipher", () => {
 		describe("secretKey", () => {
 			it("initially has a key of 3", () => {
 				expect(wrapper.state("secret")).toEqual(3)
+				expect(secretKey().prop("aria-invalid")).toEqual(false)
 			})
 
-			it("negative input leads to default", () => {
-				change(secretKey(), -1)
-				expect(wrapper.state("secret")).toEqual(3)
+			it("negative input leads to invalid", () => {
+				change(secretKey(), "-1")
+				expect(secretKey().prop("aria-invalid")).toEqual(true)
 			})
 
-			it("zero input leads to default", () => {
-				change(secretKey(), 0)
-				expect(wrapper.state("secret")).toEqual(3)
+			it("zero input leads to invalid", () => {
+				change(secretKey(), "0")
+				expect(secretKey().prop("aria-invalid")).toEqual(true)
+			})
+
+			it("non numeric input leads to default", () => {
+				change(secretKey(), "I'm not a number")
+				expect(secretKey().prop("aria-invalid")).toEqual(true)
 			})
 		})
 	})

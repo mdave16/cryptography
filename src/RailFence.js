@@ -8,6 +8,7 @@ const compareBy = c => (a, b) => a[c] - b[c]
 const compareByThen = (c, d) => (a, b) =>
 	compareBy(c)(a, b) === 0 ? compareBy(d)(a, b) : compareBy(c)(a, b)
 const range = n => Array.from(Array(n).keys())
+const isString = x => typeof x === "string" || x instanceof String
 
 class RailFence extends Component {
 	constructor(props) {
@@ -50,6 +51,10 @@ class RailFence extends Component {
 	}
 
 	plainTextChange = event => {
+		if (isString(this.state.secret)) {
+			this.setState({ plain: event.target.value })
+			return
+		}
 		if (this.state.mode === "encrypt") {
 			this.setState({
 				plain: event.target.value,
@@ -58,6 +63,10 @@ class RailFence extends Component {
 		}
 	}
 	cipherTextChange = event => {
+		if (isString(this.state.secret)) {
+			this.setState({ cipher: event.target.value })
+			return
+		}
 		if (this.state.mode === "decrypt") {
 			this.setState({
 				plain: this.decrypt(this.state.secret, event.target.value),
@@ -66,8 +75,12 @@ class RailFence extends Component {
 		}
 	}
 	secretChange = event => {
-		const secret = Number.parseInt(event.target.value)
-		if (secret <= 0 || isNaN(secret)) {return}
+		const v = event.target.value
+		if (isNaN(v) || v === "" || Number.parseInt(v) <= 0) {
+			this.setState({ secret: v })
+			return
+		}
+		const secret = Number.parseInt(v)
 		if (this.state.mode === "encrypt") {
 			this.setState({
 				secret: secret,
@@ -93,7 +106,6 @@ class RailFence extends Component {
 				<h2>Rail Fence Cipher</h2>
 				<blockquote cite="https://en.wikipedia.org/wiki/Rail_fence_cipher">
 					<p>
-						{" "}
 						The <strong>rail fence cipher</strong> (also called a{" "}
 						<strong>zigzag cipher</strong>) is a form of{" "}
 						<a
@@ -125,13 +137,12 @@ class RailFence extends Component {
 						className="u-full-width"
 						id="secret"
 						type="number"
-						pattern="[0-9]+"
+						aria-invalid={isString(this.state.secret)}
 						onChange={this.secretChange}
 						value={this.state.secret}
 					/>
 				</div>
 				<div className="row">
-					{" "}
 					<label htmlFor="plain">Decrypted message: </label>
 					<textarea
 						className="u-full-width"
@@ -143,7 +154,6 @@ class RailFence extends Component {
 					/>
 				</div>
 				<div className="row">
-					{" "}
 					<label htmlFor="cipher">Encrypted message: </label>
 					<textarea
 						className="u-full-width"

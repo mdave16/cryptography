@@ -181,7 +181,6 @@ class Substitution extends Component {
 					/>
 				</div>
 				<div className="row">
-					{" "}
 					<label htmlFor="plain">Decrypted message: </label>
 					<textarea
 						className="u-full-width"
@@ -193,7 +192,6 @@ class Substitution extends Component {
 					/>
 				</div>
 				<div className="row">
-					{" "}
 					<label htmlFor="cipher">Encrypted message: </label>
 					<textarea
 						className="u-full-width"
