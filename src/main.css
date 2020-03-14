@@ -1,7 +1,9 @@
-input[readOnly], textarea[readOnly] {
-	background-color:  #e1e1d0
+input[readOnly],
+textarea[readOnly] {
+  background-color: #e1e1d0;
 }
 
-input[aria-invalid="true"], input[aria-invalid="true"]:focus {
-	border: red thin solid;
+input[aria-invalid="true"],
+input[aria-invalid="true"]:focus {
+  border: red thin solid;
 }
