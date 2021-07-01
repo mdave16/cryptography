@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/main.css"],"names":[],"mappings":"AAAA,mCAEE,wBACF,CAEA,wDAEE,qBACF","file":"main.c008a368.chunk.css","sourcesContent":["input[readOnly],\ntextarea[readOnly] {\n  background-color: #e1e1d0;\n}\n\ninput[aria-invalid=\"true\"],\ninput[aria-invalid=\"true\"]:focus {\n  border: red thin solid;\n}\n"]}
